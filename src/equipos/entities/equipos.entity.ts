@@ -1,21 +1,22 @@
-import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
+import { Column, PrimaryGeneratedColumn, Entity } from "typeorm";
 
-@Entity({ name: 'equipos' })
+@Entity('equipos')
 export class EquipoEntity {
-  @PrimaryGeneratedColumn()
-  id: number;
+    @PrimaryGeneratedColumn()
+    id: number;
 
-  @Column()
-  numero_serie: number;
-
-  @Column()
-  estado: string;
+    @Column()
+    numero_serie: number;
 
 
-  constructor(numero_serie: number, estado: string) {
-    this.numero_serie = numero_serie;
-    this.estado = estado;
-  }
+    @Column()
+    estado: string;
+    
+   
+
+    @Column({ type: 'timestamp', default: () => "CURRENT_TIMESTAMP" })
+    fecha_registro: Date;
+
 }
 
 

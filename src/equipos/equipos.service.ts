@@ -1,31 +1,35 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { FindOneOptions, Repository } from 'typeorm';
-import { EquipoEntity } from 'src/equipos/entities/equipos.entity'; // Ajusta la ruta según tu estructura
+import { EquipoEntity } from './entities/equipos.entity';
+import { equipoDto } from './entities/equipo.interface';
 
 @Injectable()
-export class EquiposService {
-  constructor(
-    @InjectRepository(EquipoEntity)
-    private equipoRepository: Repository<EquipoEntity>,
-  ) {}
+export class EquipoService {
 
-  async createEquipo(numero_serie: number, estado: string): Promise<any> {
-    // Puedes realizar validaciones u operaciones específicas aquí antes de guardar en la base de datos
-     const nuevoEquipo = this.equipoRepository.create({ numero_serie, estado });
-     return nuevoEquipo
-     return await this.equipoRepository.save(nuevoEquipo);
-    return await this.equipoRepository.find()
-  }
+    constructor(
+        @InjectRepository(EquipoEntity)
+        private equipoRepository: Repository<EquipoEntity>,
+    ) {}
 
-  // Puedes agregar más métodos según tus necesidades, por ejemplo:
-  async findAllEquipos(): Promise<EquipoEntity[]> {
-    return await this.equipoRepository.find();
-  }
+    async AddEquipo(equipos: equipoDto): Promise<any>{
+        let item = new EquipoEntity();
+        item.numero_serie = equipos.numero_serie;
+        item.estado = equipos.estado;
+        const new_equipo = await this.equipoRepository.save(item);
+        return { new_equipo };
+    }
 
-  async findEquipoById(id: FindOneOptions<EquipoEntity>): Promise<EquipoEntity | undefined> {
-    return await this.equipoRepository.findOne(id);
-  }
 
-  // Agrega otros métodos según tus necesidades
+    getAllEquipo(): Promise<EquipoEntity[]> {
+        return this.equipoRepository.find();
+    }
+
+    getEquipobyID(id: any): Promise<EquipoEntity> {
+        return this.equipoRepository.findOne(id);
+    }
+
+    async eliminarEquipo(id: number): Promise<void> {
+        await this.equipoRepository.delete(id);
+    }
 }

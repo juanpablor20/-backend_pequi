@@ -1,19 +1,26 @@
-// equipo.controller.ts
+import { equipoDto } from './entities/equipo.interface';
+import { EquipoEntity } from './entities/equipos.entity';
+import { EquipoService } from './equipos.service';
+import { Controller, Get, Post, Delete, Param, Put, Body,  } from '@nestjs/common';
 
-import { Controller, Post, Body } from '@nestjs/common';
-import { EquiposService } from './equipos.service';
-import { DataSource } from 'typeorm';
 @Controller('equipos')
 export class EquipoController {
-  
-  constructor(private equiposService: EquiposService) {}
+    constructor(private readonly equipoService: EquipoService){}
 
-  @Post()
-  async createEquipo(@Body('numero_serie') numero_serie: number, @Body('estado') estado: string) {
-   return await this.equiposService.createEquipo(numero_serie, estado);
+    @Get()
+    async getEquipo(): Promise<EquipoEntity[]>{
+        return await this.equipoService.getAllEquipo();
+    }
 
-  }
+    @Post()
+    async addEquipo(@Body() equipo: equipoDto): Promise<EquipoEntity>{
+        return await this.equipoService.AddEquipo(equipo);
+    }
+   
+    @Delete(':id')
+    async deleteEquipo(@Param() params): Promise<void>{
+        await this.equipoService.eliminarEquipo(params.id);
+    }
 
-  // Otros métodos según tus necesidades
 }
 

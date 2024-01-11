@@ -5,9 +5,11 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { UserModule } from './user/user.module';
 import { AprendicesModule } from './aprendices/aprendices.module';
+import { EquipoModule } from './equipos/module/equipos.module';
 
 @Module({
   imports: [
+    EquipoModule,
     UserModule,
     AprendicesModule,
     ConfigModule.forRoot({
