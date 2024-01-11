@@ -1,26 +1,19 @@
 import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
 
-@Entity({ name: 'prestamo' })
+@Entity('prestamos')
 export class PrestamoEquipoEntity {
   @PrimaryGeneratedColumn()
-  id: number;
+  id: string;
 
   @Column()
-  numero_documento_aprendiz: number;
+  numero_documento: number;
 
   @Column()
-  numero_serie_pc: number;
+  numero_serie: number;
 
-  @Column()
-  fecha: Date;
+  @Column({ type: 'timestamp', default: () => "CURRENT_TIMESTAMP" })
 
-  @Column()
+  fecha_prestamo: Date;
+  @Column({ default: 'Disponible' }) 
   estado: string;
-
-  constructor(numero_documento_aprendiz: number, numero_serie_pc: number, fecha: Date,  estado: string) {
-    this.numero_documento_aprendiz = numero_documento_aprendiz;
-    this.numero_serie_pc = numero_serie_pc;
-    this.fecha = fecha;
-    this.estado =  estado;
-  }
 }

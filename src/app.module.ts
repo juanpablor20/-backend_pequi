@@ -4,11 +4,13 @@ import { AppService } from './app.service';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { UserModule } from './user/user.module';
-import { AprendicesModule } from './aprendices/aprendices.module';
 import { EquipoModule } from './equipos/module/equipos.module';
+import { AprendicesModule } from './aprendices/module/aprendices.module';
+import { PrestamoEquipoModule } from './prestamos/module/prestamos.module';
 
 @Module({
   imports: [
+    PrestamoEquipoModule,
     EquipoModule,
     UserModule,
     AprendicesModule,

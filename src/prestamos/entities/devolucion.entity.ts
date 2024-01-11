@@ -1,7 +1,7 @@
-import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
+/*import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
 
-@Entity({ name: 'prestamo_equipo' })
-export class PrestamoEquipoEntity {
+@Entity({ name: 'devolucion_equipo' })
+export class devolucionEquipoEntity {
   @PrimaryGeneratedColumn()
   id: number;
 
@@ -24,3 +24,4 @@ export class PrestamoEquipoEntity {
     this.estado =  estado;
   }
 }
+*/

@@ -3,31 +3,36 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { PrestamoEquipoEntity } from 'src/prestamos/entities/prestamo.entity';
 import { Repository } from 'typeorm';
-
+import { PrestamoDTO } from './entities/prestamo.interface';
 @Injectable()
 export class PrestamoService {
-    createEquipo(numero_serie: number, estado: string) {
-        throw new Error('Method not implemented.');
-    }
-    constructor(
-        @InjectRepository(PrestamoEquipoEntity)
-        private equipoRepository: Repository<PrestamoEquipoEntity>,
-    ) { }
-    async prestarsevice(idEquipo: any): Promise<void> {
-        // Obtener el equipo por ID
-        const equipo = await this.equipoRepository.findOne(idEquipo);
+  constructor(
+    @InjectRepository(PrestamoEquipoEntity)
+    private readonly prestamoRepository: Repository<PrestamoEquipoEntity>,
+  ) {}
 
-        // Verificar si el equipo existe
-        if (!equipo) {
-            throw new Error('Equipo no encontrado');
-        }
+  async prestarEquipo(prestamos: PrestamoDTO): Promise<any> {
+    let item = new PrestamoEquipoEntity();
+    item.numero_documento = prestamos.numero_documento;
+    item.numero_serie = prestamos.numero_serie;
+    item.estado = 'En prestamo';
+    const new_equipo = await this.prestamoRepository.save(item);
+    return {new_equipo};
+  }
 
-        // Actualizar el estado del equipo a "Prestado"
-        equipo.estado = 'Prestado';
-        await this.equipoRepository.save(equipo);
+  async devolverEquipo(id: string): Promise<any> {
+    const prestamo = await this.prestamoRepository.findOne({ where: { id } });
+
+    
+    if (!prestamo) {
+      return undefined; 
     }
 
-    devolverEquipo(idEquipo: number): void {
-        // Lógica para cambiar el estado del equipo a "Disponible" en la base de datos
-    }
+    prestamo.estado = 'Disponible';
+    return this.prestamoRepository.save(prestamo);
+  }
+  async findAll(): Promise<PrestamoEquipoEntity[]> {
+    return this.prestamoRepository.find();
+  }
+
 }

@@ -13,53 +13,38 @@ export class AprendicesService {
     private readonly aprendiceRepository: Repository<AprendiceEntity>,
   ) {}
 
-  async create(createAprendiceDto: any): Promise<any> {
-    try {
-      const nuevoAprendice = this.aprendiceRepository.create(createAprendiceDto);
+  async create(createAprendiceDto: CreateAprendiceDto): Promise<AprendiceEntity> {
+    const aprendice = this.aprendiceRepository.create(createAprendiceDto);
+    
+    // Aquí puedes manejar las relaciones, por ejemplo, asignar contactos si existen en el DTO
+    // aprendice.contactos = createAprendiceDto.contactos;
 
-      const errors = await validate(nuevoAprendice);
-      if (errors.length > 0) {
-        throw new Error('Datos de aprendiz no válidos');
-      }
-
-      return await this.aprendiceRepository.save(nuevoAprendice);
-    } catch (error) {
-      console.error('Error al crear un nuevo aprendiz:', error);
-      throw error; // Propaga el error después de hacer logging
-    }
+    return this.aprendiceRepository.save(aprendice);
   }
 
   async findAll(): Promise<AprendiceEntity[]> {
-    return await this.aprendiceRepository.find();
+    return this.aprendiceRepository.find();
   }
 
-  async findOne(id: any): Promise<AprendiceEntity> {
-    const aprendice = await this.aprendiceRepository.findOne(id);
-    if (!aprendice) {
-      throw new NotFoundException(`Aprendice con ID ${id} no encontrado.`);
+  async findOne(id: string): Promise<AprendiceEntity | undefined> {
+    return this.aprendiceRepository.findOne({ where: { id } });
+  }
+  
+
+  async update(id: string, newData: Partial<AprendiceEntity>): Promise<AprendiceEntity | undefined> {
+    const existingAprendiz = await this.aprendiceRepository.findOneBy({id:id});
+    
+    if (!existingAprendiz) {
+      throw new NotFoundException(`Aprendiz con ID ${id} no encontrado`);
     }
-    return aprendice;
+
+    await this.aprendiceRepository.update(id, newData);
+    return this.aprendiceRepository.findOneBy({id:id});
   }
 
-  // async update(id: number, updateAprendiceDto: UpdateAprendiceDto): Promise<AprendiceEntity> {
-  //   const aprendice = await this.findOne(id);
-  //   this.aprendiceRepository.merge(aprendice, updateAprendiceDto);
+  async remove(id: string): Promise<void> {
+    await this.aprendiceRepository.delete(id);
+   }
 
-  //   try {
-  //     const errors = await validate(aprendice);
-  //     if (errors.length > 0) {
-  //       throw new Error('Datos de aprendiz no válidos');
-  //     }
-
-  //     return await this.aprendiceRepository.save(aprendice);
-  //   } catch (error) {
-  //     console.error(`Error al actualizar el aprendiz con ID ${id}:`, error);
-  //     throw error; // Propaga el error después de hacer logging
-  //   }
-  // }
-
-  async remove(id: number): Promise<void> {
-    const aprendice = await this.findOne(id);
-    await this.aprendiceRepository.remove(aprendice);
-  }
 }
+

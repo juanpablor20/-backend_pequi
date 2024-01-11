@@ -12,28 +12,28 @@ import {
 @Entity('aprendices')
 export class AprendiceEntity {
     @PrimaryGeneratedColumn('uuid')
-    id: number 
+    id: string
 
     @Column()
     name: string
 
-    // @Column()
-    // apellido: string
+     @Column()
+     apellido: string
 
-    // @Column()
-    // tipo_identidad: string
+     @Column()
+    tipo_identidad: string
 
-    // @Column()
-    // Numero_Documento: string
+     @Column()
+     Numero_Documento: string
 
-    // @CreateDateColumn()
-    // created_at: Date
+     @CreateDateColumn()
+     created_at: Date
 
-    // @UpdateDateColumn()
-    // updated_at: Date
+     @UpdateDateColumn()
+     updated_at: Date
 
     // @OneToMany(() => ContactoEntity, contacto => contacto.aprendiz)
-    // contactos: ContactoEntity[];
+     //contactos: ContactoEntity[];
 
 
     // @ManyToOne(() => Tecnico, tecnico => tecnico.aprendices)
