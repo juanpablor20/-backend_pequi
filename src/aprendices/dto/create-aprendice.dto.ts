@@ -1,9 +1,9 @@
 // create-aprendice.dto.ts
 export class CreateAprendiceDto {
-  readonly name: string;
-  readonly apellido: string;
-  readonly tipo_identidad: string;
-  readonly Numero_Documento: string;
+   name: string;
+   apellido: string;
+   tipo_identidad: string;
+  Numero_Documento:number;
   
     // // Nuevas propiedades para objetos relacionados
     // contacto?:{id: number};

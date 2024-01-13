@@ -6,7 +6,8 @@ import { AprendiceEntity } from '../entities/aprendice.entity';
 @Module({
   imports: [TypeOrmModule.forFeature([AprendiceEntity])],
   controllers: [AprendicesController],
-  providers: [AprendicesService],
+  providers: [AprendicesService, AprendiceEntity],
+  exports:[AprendiceEntity, AprendicesService]
 })
 export class AprendicesModule {}
 

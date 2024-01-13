@@ -9,9 +9,9 @@ export class EquipoEntity {
     numero_serie: number;
 
 
-    @Column()
+    @Column({default: 'disponible'})
     estado: string;
-    
+
    
 
     @Column({ type: 'timestamp', default: () => "CURRENT_TIMESTAMP" })

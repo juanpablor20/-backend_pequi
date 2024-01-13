@@ -8,19 +8,27 @@ import { validate } from 'class-validator';
 
 @Injectable()
 export class AprendicesService {
+  
   constructor(
     @InjectRepository(AprendiceEntity)
     private readonly aprendiceRepository: Repository<AprendiceEntity>,
   ) {}
 
-  async create(createAprendiceDto: CreateAprendiceDto): Promise<AprendiceEntity> {
-    const aprendice = this.aprendiceRepository.create(createAprendiceDto);
-    
-    // Aquí puedes manejar las relaciones, por ejemplo, asignar contactos si existen en el DTO
-    // aprendice.contactos = createAprendiceDto.contactos;
-
-    return this.aprendiceRepository.save(aprendice);
+  async existeAprendizpornumeroDocumento( Numero_Documento:number): Promise<boolean> {
+    const aprendice= await this.aprendiceRepository.findOne({ where: {  Numero_Documento } });
+    return !!aprendice; // Devuelve true si el equipo existe, false si no existe
   }
+  async create(aprendices: CreateAprendiceDto): Promise<any>{
+    let item = new AprendiceEntity();
+    item.name = aprendices.name;
+    item.apellido = aprendices.apellido;
+    item.tipo_identidad = aprendices.tipo_identidad;
+    item.Numero_Documento = aprendices.Numero_Documento;
+    const new_aprendice= await this.aprendiceRepository.save(item);
+    return { new_aprendice };
+}
+
+  
 
   async findAll(): Promise<AprendiceEntity[]> {
     return this.aprendiceRepository.find();

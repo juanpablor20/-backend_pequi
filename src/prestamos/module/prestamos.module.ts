@@ -3,12 +3,17 @@ import { PrestamoEquipoEntity } from "../entities/prestamo.entity";
 import { PrestamoController } from "../prestamos.controller";
 import { Module } from "@nestjs/common";
 import { PrestamoService } from "../Prestamo.Service";
+import { EquipoModule } from "src/equipos/module/equipos.module";
+import { AprendicesModule } from "src/aprendices/module/aprendices.module";
 
 @Module({
-  imports: [TypeOrmModule.forFeature([PrestamoEquipoEntity])],
+  imports: [TypeOrmModule.forFeature([PrestamoEquipoEntity]), EquipoModule, AprendicesModule],
   controllers: [PrestamoController],
   providers: [PrestamoService],
+  exports: [PrestamoService],
 })
-export class PrestamoEquipoModule {}
+export class PrestamoEquipoModule { }
+
+
 
 

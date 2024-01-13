@@ -3,6 +3,7 @@ import { PrestamoService } from 'src/prestamos/Prestamo.Service';
 import { Response } from 'express';
 import { PrestamoDTO } from './entities/prestamo.interface';
 import { PrestamoEquipoEntity } from './entities/prestamo.entity';
+import { SolicitudPrestamoDTO } from './entities/solicitud.prestamo';
 
 @Controller('prestamos')
 export class PrestamoController {
@@ -12,7 +13,7 @@ export class PrestamoController {
   async prestarEquipo(@Body() prestamos: PrestamoDTO):Promise<PrestamoEquipoEntity> {
 return await this.prestamoService.prestarEquipo (prestamos)  
   }
-  
+ 
   @Patch(':id/devolucion')
   devolverEquipo(@Param('id') id: string) {
     return this.prestamoService.devolverEquipo(id);
@@ -25,3 +26,5 @@ return await this.prestamoService.prestarEquipo (prestamos)
 
   // Otros métodos...
 }
+
+  

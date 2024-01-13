@@ -24,7 +24,7 @@ export class AprendiceEntity {
     tipo_identidad: string
 
      @Column()
-     Numero_Documento: string
+     Numero_Documento: number
 
      @CreateDateColumn()
      created_at: Date

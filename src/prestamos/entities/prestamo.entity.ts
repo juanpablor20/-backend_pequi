@@ -6,7 +6,7 @@ export class PrestamoEquipoEntity {
   id: string;
 
   @Column()
-  numero_documento: number;
+  Numero_Documento: number;
 
   @Column()
   numero_serie: number;
@@ -16,4 +16,5 @@ export class PrestamoEquipoEntity {
   fecha_prestamo: Date;
   @Column({ default: 'Disponible' }) 
   estado: string;
+  
 }

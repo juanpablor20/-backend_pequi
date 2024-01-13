@@ -12,10 +12,16 @@ export class EquipoService {
         private equipoRepository: Repository<EquipoEntity>,
     ) {}
 
+    async existeEquipoPorNumeroSerie(numero_serie: number): Promise<boolean> {
+        const equipo = await this.equipoRepository.findOne({ where: { numero_serie } });
+        return !!equipo; // Devuelve true si el equipo existe, false si no existe
+      }
+
     async AddEquipo(equipos: equipoDto): Promise<any>{
         let item = new EquipoEntity();
         item.numero_serie = equipos.numero_serie;
         item.estado = equipos.estado;
+        item.estado = 'disponible';
         const new_equipo = await this.equipoRepository.save(item);
         return { new_equipo };
     }

@@ -10,8 +10,8 @@ import { PrestamoEquipoModule } from './prestamos/module/prestamos.module';
 
 @Module({
   imports: [
-    PrestamoEquipoModule,
     EquipoModule,
+    PrestamoEquipoModule,
     UserModule,
     AprendicesModule,
     ConfigModule.forRoot({

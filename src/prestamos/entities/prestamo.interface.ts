@@ -1,5 +1,6 @@
 export class PrestamoDTO {
-    numero_documento: number;
+  Numero_Documento: number;
     numero_serie: number;
+
   }
   

@@ -12,9 +12,10 @@ export class AprendicesController {
   constructor(private readonly aprendicesService: AprendicesService) {}
 
   @Post()
-  create(@Body() createAprendiceDto: CreateAprendiceDto): Promise<AprendiceEntity> {
-    return this.aprendicesService.create(createAprendiceDto);
+  async create(@Body() aprendices: CreateAprendiceDto): Promise<AprendiceEntity> {
+    return  await this.aprendicesService.create(aprendices);
   }
+ 
 
   @Get()
   findAll() {
