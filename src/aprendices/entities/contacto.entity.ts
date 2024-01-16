@@ -1,4 +1,4 @@
-/* contacto.entity.ts
+
  import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from 'typeorm';
 import { AprendiceEntity } from './aprendice.entity';
 
@@ -13,11 +13,11 @@ export class ContactoEntity {
 
   
 
-  @ManyToOne(() => AprendiceEntity, aprendiz => aprendiz.contactos)
-  aprendiz: AprendiceEntity;
+//  @ManyToOne(() => AprendiceEntity, aprendiz => aprendiz.contactos)
+  //aprendiz: AprendiceEntity;
 
 
   
 
 }
-*/
+

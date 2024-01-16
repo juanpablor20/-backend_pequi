@@ -9,8 +9,8 @@ import { EquipoController } from '../equipos.controller';
 @Module({
   imports: [TypeOrmModule.forFeature([EquipoEntity])],
   controllers: [EquipoController],
-  providers: [EquipoService, EquipoEntity],
-  exports: [EquipoService, EquipoEntity]
+  providers: [EquipoService, EquipoEntity, Repository],
+  exports: [EquipoService, EquipoEntity, Repository]
 })
 export class EquipoModule { }
 

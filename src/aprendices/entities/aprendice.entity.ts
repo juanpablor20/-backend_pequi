@@ -8,6 +8,7 @@ import {
     OneToMany,
     ManyToOne,
 } from 'typeorm'
+import { ContactoEntity } from './contacto.entity';
 
 @Entity('aprendices')
 export class AprendiceEntity {
@@ -31,9 +32,12 @@ export class AprendiceEntity {
 
      @UpdateDateColumn()
      updated_at: Date
-
-    // @OneToMany(() => ContactoEntity, contacto => contacto.aprendiz)
-     //contactos: ContactoEntity[];
+     
+     //@OneToMany(() => PrestamoEquipoEntity, prestamo => prestamo.aprendice)
+     //prestamos: PrestamoEquipoEntity[];
+   
+   // @OneToMany(() => ContactoEntity, contacto => contacto.aprendiz)
+    /// contactos: ContactoEntity[];
 
 
     // @ManyToOne(() => Tecnico, tecnico => tecnico.aprendices)

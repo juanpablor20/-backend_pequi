@@ -7,16 +7,11 @@ import { SolicitudPrestamoDTO } from './entities/solicitud.prestamo';
 
 @Controller('prestamos')
 export class PrestamoController {
-  constructor(private readonly prestamoService: PrestamoService) {}
+  constructor(private readonly prestamoService: PrestamoService) { }
 
   @Post()
-  async prestarEquipo(@Body() prestamos: PrestamoDTO):Promise<PrestamoEquipoEntity> {
-return await this.prestamoService.prestarEquipo (prestamos)  
-  }
- 
-  @Patch(':id/devolucion')
-  devolverEquipo(@Param('id') id: string) {
-    return this.prestamoService.devolverEquipo(id);
+  async prestarEquipo(@Body() prestamos: PrestamoDTO): Promise<PrestamoEquipoEntity> {
+    return await this.prestamoService.prestarEquipo(prestamos)
   }
 
   @Get()
@@ -27,4 +22,3 @@ return await this.prestamoService.prestarEquipo (prestamos)
   // Otros métodos...
 }
 
-  
