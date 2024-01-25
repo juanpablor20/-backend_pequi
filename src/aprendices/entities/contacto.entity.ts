@@ -1,4 +1,4 @@
-
+/*
  import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from 'typeorm';
 import { AprendiceEntity } from './aprendice.entity';
 
@@ -19,5 +19,5 @@ export class ContactoEntity {
 
   
 
-}
+}*/
 

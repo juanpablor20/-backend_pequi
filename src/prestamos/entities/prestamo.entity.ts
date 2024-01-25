@@ -19,12 +19,19 @@ export class PrestamoEquipoEntity {
   fecha_prestamo: Date;
 
 
+  
+  @Column({ type: 'timestamp', nullable: true })
+  fechaDevolucion: Date;
+
   @ManyToOne(() => EquipoEntity)
   @JoinColumn({ name: 'equiposId' })
   equipos: EquipoEntity;
 
+
   @ManyToOne(() => AprendiceEntity)
   @JoinColumn({name:'aprendiceId' }) 
   aprendice: AprendiceEntity;
-  estado: string;
+
+
+ 
 }

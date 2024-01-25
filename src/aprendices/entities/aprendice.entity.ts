@@ -8,7 +8,6 @@ import {
     OneToMany,
     ManyToOne,
 } from 'typeorm'
-import { ContactoEntity } from './contacto.entity';
 
 @Entity('aprendices')
 export class AprendiceEntity {
